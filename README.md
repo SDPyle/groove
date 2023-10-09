@@ -10,6 +10,8 @@ A groovy open source SCRUM application utilizing the STAPLE stack:
 - Elixir
 
 In addition to some basic SCRUM functionality, users can indicate what they are working on and every client is updated in real time; giving the app a fun sense of teamwork.
+![Screenshot from 2023-10-09 15-38-50](https://github.com/SDPyle/groove/assets/7622818/dc39cbc6-0032-49e6-9a43-23f7856f91af)
+![Screenshot from 2023-10-09 15-41-38](https://github.com/SDPyle/groove/assets/7622818/114e7a9e-2e26-4f1c-b69e-0cacd4db639d)
 
 ## Desired Feature Set
 

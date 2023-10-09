@@ -1,0 +1,3 @@
+.card {
+  @apply bg-white shadow-soft-xl rounded-2xl;
+}

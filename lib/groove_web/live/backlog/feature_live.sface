@@ -1,0 +1,81 @@
+<div class="grid grid-cols-4">
+  <div class="col-span-3">
+    <div>
+      <div class="card p-8">
+        <div class="flex justify-between">
+          <div>
+            <p class="mb-2 font-semibold text-sm text-slate-500">Feature</p>
+            <h4 class="mb-0">{@feature.title}</h4>
+          </div>
+
+          <button class="h-5 w-5 text-fuchsia-600" :on-click="toggle_show_edit_feature_modal">
+            <Heroicons.Surface.Icon name="pencil" type="outline" />
+          </button>
+        </div>
+        <div class="flex justify-between h-min">
+          <p class="my-0 text-sm">{@feature.points} Points</p>
+          <GrooveWeb.Components.StatusPill status={@feature.status} />
+        </div>
+      </div>
+
+      <div class="card p-8 mt-4">
+        {raw(@rendered_description)}
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="h-7">
+      <p class="block px-8 m-0 text-sm text-center whitespace-nowrap text-slate-700">
+        <span class="font-semibold transition-all duration-200 ease-nav-brand">
+          Working Here
+        </span>
+      </p>
+    </div>
+    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent">
+    <ul class="px-4">
+      <li class="mb-2">
+        <ToggleWorking
+          click="toggle_working"
+          is_working_here={is_user_working_here?(@current_user.id, @working_user_views)}
+        />
+      </li>
+      {#for working_user <- @working_user_views}
+        <li class="mb-2">
+          <WorkingUser
+            name={working_user.user_name}
+            work_title={working_user.work_title}
+            shift_count={working_user.shift_count}
+            work_count={working_user.work_count}
+            total_count={working_user.total_count}
+          />
+        </li>
+      {/for}
+    </ul>
+  </div>
+</div>
+
+<div
+  class={"modal", hidden: !@show_edit_feature_modal}
+  :on-window-keydown="toggle_show_edit_feature_modal"
+  phx-key="Escape"
+>
+  <div class="modal-background" />
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <h6 class="modal-card-title">Edit Feature</h6>
+      <button class="h-5 w-5" :on-click="toggle_show_edit_feature_modal">
+        <Heroicons.Surface.Icon name="x-mark" type="outline" />
+      </button>
+    </header>
+    <section class="modal-card-body">
+      <GrooveWeb.Backlog.FeatureForm
+        id="feature-form"
+        form={@edit_feature_form}
+        submit="update_feature"
+        change="validate"
+      />
+    </section>
+    <footer class="modal-card-foot" style="justify-content: flex-end">
+    </footer>
+  </div>
+</div>

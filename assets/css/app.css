@@ -1,0 +1,14 @@
+/* Import scoped CSS rules for components */
+@import "./_components.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./forms.css";
+@import "./tables.css";
+@import "./modals.css";
+@import "./cards.css";
+@import "./typography.css";
+
+/* This file is for your main application CSS */

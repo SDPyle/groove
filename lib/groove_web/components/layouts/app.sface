@@ -1,0 +1,56 @@
+<aside class="max-w-62.5 z-990 fixed inset-y-0 my-4 ml-4 block w-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0  p-0 antialiased shadow-none bg-transparent">
+  <div class="">
+    <p
+      class="block px-8 py-4 m-0 text-lg text-center whitespace-nowrap text-slate-700"
+      target="_blank"
+    >
+      <span class="font-semibold transition-all duration-200 ease-nav-brand">
+        Goove
+      </span>
+    </p>
+  </div>
+
+  <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent">
+
+  <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
+    <ul class="flex flex-col pl-0 mb-0">
+      <li class="mb-2 px-2">
+        <GrooveWeb.Components.IconLink to="/" icon="rectangle-group" active={@page == :dash}>
+          Dashboard
+        </GrooveWeb.Components.IconLink>
+      </li>
+
+      <li class="mb-2 px-2">
+        <GrooveWeb.Components.IconLink
+          to="/backlog"
+          icon="clipboard-document-list"
+          active={@page == :backlog}
+        >
+          Backlog
+        </GrooveWeb.Components.IconLink>
+      </li>
+
+      <li class="w-full mt-8">
+        <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">
+          Account pages
+        </h6>
+      </li>
+
+      <li class="mb-2 px-2">
+        <GrooveWeb.Components.IconLink to="/profile" icon="user" active={@page == :profile}>
+          Profile
+        </GrooveWeb.Components.IconLink>
+      </li>
+      <li class="mb-2 px-2">
+        <GrooveWeb.Components.IconLink to="/sign-out" icon="arrow-right-on-rectangle" active={false}>
+          Sign Out
+        </GrooveWeb.Components.IconLink>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<main class="my-7 mx-8 ml-68.5 relative">
+  <.flash_group flash={@flash} />
+  {@inner_content}
+</main>

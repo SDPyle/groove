@@ -1,0 +1,15 @@
+.modal {
+  @apply absolute top-0 left-0 z-50 w-full h-full;
+}
+
+.modal-background {
+  @apply w-full h-full bg-zinc-50/90 fixed inset-0 transition-opacity;
+}
+
+.modal-card {
+  @apply relative max-w-2xl p-4 bg-slate-50 mx-auto rounded-lg shadow-lg z-50 overflow-auto dark:bg-slate-700;
+}
+
+.modal-card-head {
+  @apply flex justify-between pb-2;
+}

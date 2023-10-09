@@ -1,0 +1,21 @@
+{
+  "name": "groove",
+  "version": "0.0.1",
+  "description": "A groovy real-time SCRUM app using the STAPLE stack.",
+  "main": "\"\"",
+  "scripts": {
+    "test": "\"\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"\""
+  },
+  "keywords": [
+    "\"\""
+  ],
+  "author": "\"\"",
+  "license": "ISC",
+  "dependencies": {
+    "tinymce": "^6.7.0"
+  }
+}

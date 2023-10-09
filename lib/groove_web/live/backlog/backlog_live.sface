@@ -1,0 +1,104 @@
+<div class="grid grid-cols-4">
+  <div class="col-span-3">
+    <div class="card table p-8">
+      <div class="header table">
+        <div class="">
+          <h5 class="flex">Backlog
+            <button
+              class="ml-2 h-7 w-7 text-fuchsia-700 rounded flex items-center justify-center"
+              :on-click="toggle_show_new_feature_modal"
+            >
+              <Heroicons.Surface.Icon name="plus-small" type="outline" class="" />
+            </button>
+          </h5>
+        </div>
+      </div>
+      <div>
+        <table class="w-full pb-2">
+          <thead>
+            <tr>
+              <th class="pl-6">Feature</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#for feature <- @backlog}
+              <tr>
+                <td>
+                  <div class="flex pl-4 py-1">
+                    <LiveRedirect to={["/backlog/", feature.id]}>
+                      <h6 class="mb-0 text-sm leading-normal">{feature.title}</h6>
+                    </LiveRedirect>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <StatusPill status={feature.status} />
+                </td>
+                <td class="text-center">
+                  <span class="text-xs font-semibold leading-tight text-slate-400">{feature.points}</span>
+                </td>
+              </tr>
+            {#else}
+            {/for}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="h-7">
+      <p class="block px-8 m-0 text-sm text-center whitespace-nowrap text-slate-700">
+        <span class="font-semibold transition-all duration-200 ease-nav-brand">
+          Working Here
+        </span>
+      </p>
+    </div>
+    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent">
+    <ul class="px-4">
+      <li class="mb-2">
+        <ToggleWorking
+          click="toggle_working"
+          is_working_here={is_user_working_here?(@current_user.id, @working_user_views)}
+        />
+      </li>
+      {#for working_user <- @working_user_views}
+        <li class="mb-2">
+          <WorkingUser
+            name={working_user.user_name}
+            work_title={working_user.work_title}
+            shift_count={working_user.shift_count}
+            work_count={working_user.work_count}
+            total_count={working_user.total_count}
+          />
+        </li>
+      {/for}
+    </ul>
+  </div>
+</div>
+
+<div
+  class={"modal", hidden: !@show_new_feature_modal}
+  :on-window-keydown="toggle_show_new_feature_modal"
+  phx-key="Escape"
+>
+  <div class="modal-background" />
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <h6 class="modal-card-title">New Feature</h6>
+      <button class="h-5 w-5" :on-click="toggle_show_new_feature_modal">
+        <Heroicons.Surface.Icon name="x-mark" type="outline" />
+      </button>
+    </header>
+    <section class="modal-card-body">
+      <GrooveWeb.Backlog.FeatureForm
+        id="feature-form"
+        form={@new_feature_form}
+        submit="save_new_feature"
+        change="validate"
+      />
+    </section>
+    <footer class="modal-card-foot" style="justify-content: flex-end">
+    </footer>
+  </div>
+</div>

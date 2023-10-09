@@ -1,0 +1,41 @@
+<div class="grid grid-cols-4">
+  <div class="col-span-3">
+    <div class="grid grid-cols-3 gap-4">
+      <IconStat header="Points Left" stat={@points_left} icon="chart-pie" />
+      <IconStat header="Hours" stat={@hours} stat_type={:float} icon="clock" />
+      <IconStat header="Working" stat={@num_working} icon="users" />
+    </div>
+  </div>
+  <div>
+    <div class="h-7">
+      <p class="block px-8 m-0 text-sm text-center whitespace-nowrap text-slate-700">
+        <span class="font-semibold transition-all duration-200 ease-nav-brand">
+          Working Now
+        </span>
+      </p>
+    </div>
+    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent">
+    <ul class="px-4">
+      {#if is_user_working_here?(@current_user.id, @working_user_views)}
+        <li class="mb-2">
+          <ToggleWorking
+            click="stop_working"
+            is_working_here={is_user_working_here?(@current_user.id, @working_user_views)}
+          />
+        </li>
+      {/if}
+
+      {#for working_user <- @working_user_views}
+        <li class="mb-2">
+          <WorkingUser
+            name={working_user.user_name}
+            work_title={working_user.work_title}
+            shift_count={working_user.shift_count}
+            work_count={working_user.work_count}
+            total_count={working_user.total_count}
+          />
+        </li>
+      {/for}
+    </ul>
+  </div>
+</div>

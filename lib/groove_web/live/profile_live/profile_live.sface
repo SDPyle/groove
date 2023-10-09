@@ -1,0 +1,25 @@
+<div class="card max-w-3xl p-8">
+  <h5>Profile</h5>
+
+  {#if @form.action == :create}
+    You must create a profile.
+  {/if}
+
+  {#if @form.submit_errors}
+    <ul>
+      {#for {field, {message, _}} <- @form.submit_errors}
+        <li>{Atom.to_string(field) <> " " <> message}</li>
+      {/for}
+    </ul>
+  {/if}
+  <Form for={@form} opts={autocomplete: "off"} submit="save" change="validate">
+    <Form.Field name={:name}>
+      <Form.Label />
+      <div class="control">
+        <Form.TextInput class="input text mb-4" />
+        <Form.ErrorTag />
+      </div>
+    </Form.Field>
+    <Form.Submit label="Submit" class="button submit" />
+  </Form>
+</div>

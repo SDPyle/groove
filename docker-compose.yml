@@ -1,0 +1,78 @@
+version: "3.9"
+networks:
+  cluster-network:
+    driver: bridge
+
+services:
+  groove-1:
+    build: .
+    command: /app/entrypoint.sh
+    hostname: groove-1.docker
+    ports:
+      - "9000:9000"
+      - "4000:4000"
+    environment:
+      - LIBCLUSTER_STRATEGY=gossip
+      - PORT=4000
+      - START_SERVER=true
+      - DATABASE_URL=ecto://postgres:postgres@pg.docker/groove
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PHX_HOST=localhost
+    networks:
+      - cluster-network
+    depends_on:
+      db:
+        condition: service_healthy
+  groove-2:
+    build: .
+    command: /app/entrypoint.sh
+    hostname: groove-2.docker
+    ports:
+      - "4001:4001"
+    environment:
+      - LIBCLUSTER_STRATEGY=gossip
+      - PORT=4001
+      - DATABASE_URL=ecto://postgres:postgres@pg.docker/groove
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PHX_HOST=localhost
+    networks:
+      - cluster-network
+    depends_on:
+      db:
+        condition: service_healthy
+  groove-3:
+    build: .
+    command: /app/entrypoint.sh
+    hostname: groove-3.docker
+    ports:
+      - "4002:4002"
+    environment:
+      - LIBCLUSTER_STRATEGY=gossip
+      - PORT=4002
+      - DATABASE_URL=ecto://postgres:postgres@pg.docker/groove
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PHX_HOST=localhost
+    networks:
+      - cluster-network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15.3
+    restart: always
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=groove
+    ports:
+      - "5432"
+    hostname: pg.docker
+    networks:
+      - cluster-network
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 2s
+      timeout: 10s
+      retries: 120

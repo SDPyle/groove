@@ -84,6 +84,16 @@ After verifying your email, you must complete your profile before accessing the 
 ### Setup
 
 ```
+mix deps.get
+```
+
+```
+mix phx.gen.release
+```
+```
+mix
+```
+```
 echo "SECRET_KEY_BASE=$(mix phx.gen.secret)" > .env
 ```
 

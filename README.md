@@ -71,7 +71,7 @@ mix ash_postgres.migrate
 iex -S mix phx.server
 ```
 
-You will need to check the logs for the email verification link, or go to http://localhost:4000/dev/mailbox.
+After registering, you will need to check the logs for the email verification link, or go to http://localhost:4000/dev/mailbox.
 
 After verifying your email, you must complete your profile before accessing the rest of the application.
 
@@ -103,7 +103,7 @@ echo "SECRET_KEY_BASE=$(mix phx.gen.secret)" > .env
 docker compose up --build
 ```
 
-You will need to check the logs for the email verification link.
+After registering, you will need to check the logs for the email verification link.
 
 After verifying your email, you must complete your profile before accessing the rest of the application.
 

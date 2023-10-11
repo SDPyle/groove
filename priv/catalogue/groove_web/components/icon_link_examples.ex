@@ -37,12 +37,12 @@ defmodule GrooveWeb.Components.IconLinkExamples do
   end
 
 @example [
-    title: "ideal active",
+    title: "active",
     height: "115px",
   ]
 
-  @doc "An example of an actve link."
-  def ideal_active_example(assigns) do
+  @doc "An example of an active link."
+  def active_example(assigns) do
     ~F"""
     <IconLink icon="flag" to="#" active>
       Test123

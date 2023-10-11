@@ -13,19 +13,19 @@ defmodule Groove.Sprints.Sprint do
 
   policies do
     policy action_type(:create) do
-      authorize_if always()
+      authorize_unless actor_attribute_equals(:confirmed_at, nil)
     end
 
     policy action_type(:read) do
-      authorize_if always()
+      authorize_unless actor_attribute_equals(:confirmed_at, nil)
     end
 
     policy action_type(:update) do
-      authorize_if always()
+      authorize_unless actor_attribute_equals(:confirmed_at, nil)
     end
 
     policy action_type(:destroy) do
-      authorize_if always()
+      authorize_unless actor_attribute_equals(:confirmed_at, nil)
     end
   end
 

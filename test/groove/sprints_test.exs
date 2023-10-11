@@ -23,12 +23,12 @@ defmodule Groove.SprintsTest do
     "end_at" => Date.add(Date.utc_today(), 21)
   }
 
-  describe "sprint creation" do
+  describe "start sprint" do
     test "should work with valid attributes" do
       user = confirmed_user()
 
       sprint =
-        create_sprint(user)
+        start_sprint(user)
 
       assert sprint.title == @valid_attrs["title"]
       assert sprint.start_at == @valid_attrs["start_at"]
@@ -49,12 +49,12 @@ defmodule Groove.SprintsTest do
     end
   end
 
-  describe "sprint update" do
+  describe "update sprint" do
     test "should work with valid attributes" do
       user = confirmed_user()
 
       sprint =
-        create_sprint(user)
+        start_sprint(user)
         |> update_sprint(@update_attrs, user)
 
       assert sprint.title == @update_attrs["title"]
@@ -81,7 +81,7 @@ defmodule Groove.SprintsTest do
       feature = feature_fixture(user)
 
       sprint =
-        create_sprint(user)
+        start_sprint(user)
         |> Sprints.Sprint.add_feature!(feature.id, actor: user)
         |> Sprints.Sprint.add_feature!(feature.id, actor: user)
 
@@ -99,7 +99,7 @@ defmodule Groove.SprintsTest do
       feature = feature_fixture(user)
 
       sprint =
-        create_sprint(user)
+        start_sprint(user)
         |> Sprints.Sprint.add_feature!(feature.id, actor: user)
 
       assert Enum.count(sprint.features) == 1
@@ -130,12 +130,12 @@ defmodule Groove.SprintsTest do
   describe "sprint read" do
     test "list should give a default of 5 sprints" do
       user = confirmed_user()
-      create_sprint(user)
-      create_sprint(user)
-      create_sprint(user)
-      create_sprint(user)
-      create_sprint(user)
-      create_sprint(user)
+      start_sprint(user)
+      start_sprint(user)
+      start_sprint(user)
+      start_sprint(user)
+      start_sprint(user)
+      start_sprint(user)
 
       sprints = Sprints.Sprint.list!(actor: user)
 
@@ -143,7 +143,7 @@ defmodule Groove.SprintsTest do
     end
   end
 
-  defp create_sprint(user) do
+  defp start_sprint(user) do
     Sprints.Sprint.start!(
       @valid_attrs["title"],
       @valid_attrs["start_at"],
